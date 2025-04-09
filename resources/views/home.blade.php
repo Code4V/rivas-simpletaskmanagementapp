@@ -30,7 +30,7 @@
       <div class="">
         <h2 class="text-2xl font-bold">User <span class="text-sky-900">Tip</span>!
         </h2>
-        <div class="flex items-center mt-1">
+        <div class="flex items-center mt-1 gap-2">
           <p class="flex">Click the stack icon on a task for more options!
           </p>
           <span>
