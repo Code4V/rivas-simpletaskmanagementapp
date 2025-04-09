@@ -20,7 +20,7 @@
     </div>
     <div class="flex flex-col gap-1">
       <label for="" class="font-semibold">Due Date</label>
-      <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ (new DateTime())->format('Y-m-d') }}" value="{{ (new DateTime($task->duedate))->format('Y-m-h') }}">
+      <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ (new DateTime())->format('Y-m-d') }}" value="{{ (new DateTime($task->duedate))->format('Y-m-d') }}">
     </div>
 
     <input type="hidden" name="id" value="{{ $task->id }}">
