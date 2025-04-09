@@ -11,16 +11,16 @@
     <form action="/tasks/insert" method="POST" class="flex flex-col gap-8 mt-4">
       @csrf
       <div class="flex flex-col gap-1">
-        <label for="" class="font-semibold">Name</label>
-        <input name="title" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="Have a task in mind?" required>
+        <label for="title" class="font-semibold">Title<span class="text-sky-900"> *</span></label>
+        <input id="title" name="title" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="Have a task in mind?" required>
       </div>
       <div class="flex flex-col gap-1">
-        <label for="" class="font-semibold">Description</label>
-        <input name="description" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="Briefly describe your task">
+        <label for="description" class="font-semibold">Description</label>
+        <input id="description" name="description" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="Briefly describe your task">
       </div>
       <div class="flex flex-col gap-1">
-        <label for="" class="font-semibold">Due Date</label>
-        <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ $now }}" value="{{ $now }}" required>
+        <label for="dueDate" class="font-semibold">Due Date<span class="text-sky-900"> *</span></label>
+        <input id="dueDate" name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ $now }}" value="{{ $now }}" required>
       </div>
       <button type="submit" class="px-4 hover:bg-sky-950 transition py-2 w-fit rounded-md bg-sky-900 text-white"> Insert Task </button>
     </form>

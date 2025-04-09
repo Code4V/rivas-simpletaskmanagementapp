@@ -14,16 +14,16 @@
   <form action="/tasks/update" method="POST" class="flex flex-col mt-10 gap-8">
     @csrf
     <div class="flex flex-col gap-1">
-      <label for="" class="font-semibold">Title</label>
-      <input name="title" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="What's on your mind" value="{{ $task->title }}">
+      <label for="title" class="font-semibold">Title<span class="text-sky-900"> *</span></label>
+      <input id="title" name="title" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="What's on your mind" value="{{ $task->title }}">
     </div>
     <div class="flex flex-col gap-1">
-      <label for="" class="font-semibold">Description</label>
-      <input name="description" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="Describe this task" value="{{ $task->description }}">
+      <label for="description" class="font-semibold">Description</label>
+      <input id="description" name="description" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="Describe this task" value="{{ $task->description }}">
     </div>
     <div class="flex flex-col gap-1">
-      <label for="" class="font-semibold">Due Date</label>
-      <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ $now }}" value="{{ (new DateTime($task->duedate))->format('Y-m-d') }}">
+      <label for="dueDate" class="font-semibold">Due Date<span class="text-sky-900"> *</span></label>
+      <input id="dueDate" name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ $now }}" value="{{ (new DateTime($task->duedate))->format('Y-m-d') }}">
     </div>
 
     <input type="hidden" name="id" value="{{ $task->id }}">
