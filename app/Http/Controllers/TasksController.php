@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tasks;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -10,15 +11,14 @@ use Illuminate\Http\RedirectResponse;
 class TasksController extends Controller
 {
     public function index() {
-
-        $currentTask = DB::table('tasks')
+        $currentTask = Tasks::query()
                     ->where('isdeleted', false)
-                    // ->where('iscomplete', false)
                     ->orderBy('iscomplete', 'asc')
                     ->orderBy('duedate', 'asc')
                     ->paginate(10);
 
-        $completedTask = DB::table('tasks')
+        // Unimplemented Feature -> shows the recent completed task
+        $completedTask = Tasks::query()
                     ->where('isdeleted', false)
                     ->where('iscomplete', true)
                     ->orderBy('updated_at', 'desc')
@@ -68,11 +68,12 @@ class TasksController extends Controller
         $updateInfo->description = $request->description;
         $updateInfo->duedate = $request->duedate;
 
+        
         $updateInfo->save();
-
+        
         return redirect('/');
     }
-
+    
     public function markAsComplete(Request $request): RedirectResponse {
         $updateInfo = Tasks::find($request->id); 
         $updateInfo->iscomplete = true;

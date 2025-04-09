@@ -1,4 +1,7 @@
 @include('partials.header')
+@php 
+  $now = (new DateTime())->format('Y-m-d');
+@endphp
 <div class="xl:w-3/4 mx-auto grid lg:grid-cols-8 lg:pt-10 px-4 xl:px-0">
   <section class="lg:col-span-2 lg:mr-8 bg-slate-50 px-4 py-6 rounded-md">
     <div class="mt-4 lg:mt-0">
@@ -17,9 +20,9 @@
       </div>
       <div class="flex flex-col gap-1">
         <label for="" class="font-semibold">Due Date</label>
-        <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ (new DateTime())->format('Y-m-d') }}" required>
+        <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ (new DateTime())->format('Y-m-d') }}" value="{{ $now }}" required>
       </div>
-      <button type="submit" class="px-4 py-2 w-fit rounded-md bg-sky-900 text-white"> Insert Task </button>
+      <button type="submit" class="px-4 hover:bg-sky-950 transition py-2 w-fit rounded-md bg-sky-900 text-white"> Insert Task </button>
     </form>
 
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Database\Factories\TasksFactory;
 
 class Tasks extends Model
@@ -13,6 +14,7 @@ class Tasks extends Model
     protected $table = 'tasks'; 
 
     protected $fillable = [
+        'id',
         'title',
         'description',
     ];

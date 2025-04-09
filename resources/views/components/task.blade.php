@@ -1,9 +1,29 @@
+@php 
+    $now = (new DateTime('now', new DateTimeZone('GMT+08:00')));
+    $duedate = (new DateTime($duedate, new DateTimeZone('GMT+08:00')));
+    $duedateFormatted = sprintf("hover:after:content-['%s']", $duedate->format("Y-m-d"));
+
+    $dueRelative = date_diff($duedate, $now);
+
+    $remaining = (int) $dueRelative->format("%a");
+
+    $daysleft = '';
+
+    if ($remaining == 0)  {
+        $daysleft .= "Within the day";
+    } else if ($remaining == 1) {
+        $daysleft .= "A day left";
+    } else 
+        $daysleft .= sprintf("%s days left", $remaining);
+
+@endphp
+
 <div class="border-t bg-slate-50 rounded-md {{ $iscomplete ? 'opacity-50 pointer-events-none' : '' }} border-t-slate-400/70 px-4 py-6 ">
     <section class="flex flex-col gap-2 h-full">
         <div class="min-w-24 flex">
             <p class="text-lg leading-4 font-bold"> {{ ucfirst($title) }} </p>
             <div class="ms-auto flex relative items-center gap-2">
-                <span class="ms-auto text-gray-500">{{ (new DateTime($duedate))->format('M d, Y') }}</span>
+                <span class="ms-auto relative text-gray-500">{{ $iscomplete ? 'Task Done' : $daysleft }}</span>
                 <span onclick="showOptions('{{$id}}')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24" fill="none" class="hover:stroke-sky-950 cursor-pointer transition duration-250 stroke-sky-900">
                         <path d="M5 6H19M5 10H19M5 14H19M5 18H19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -14,7 +34,7 @@
                         @csrf
                         <input type="hidden" name="_method" value="DELETE" />
                         <input type="hidden" name="id" value="{{ $id }}" />
-                        <button class="px-4 py-2 hover:text-red-800 hover:font-semibold transition" type="submit"> Delete
+                        <button class="px-4 py-2 hover:text-red-800 hover:font-semibold transition text-left w-full" type="submit"> Delete
                         </button>
                     </form>
                     <a href="/task/{{ $id }}" class="px-4 py-2 transition hover:font-semibold border-t border-t-slate-400/70 hover:text-sky-900">Edit</a>
@@ -23,7 +43,7 @@
                         @csrf
                         <input type="hidden" name="_method" value="PATCH" />
                         <input type="hidden" name="id" value="{{ $id }}" />
-                        <button class="px-4 py-2 transition hover:text-green-900 border-t border-t-slate-400/70 hover:font-semibold">Mark As Complete</button>
+                        <button class="px-4 py-2 transition hover:text-green-900 border-t w-full text-left border-t-slate-400/70 hover:font-semibold">Mark As Complete</button>
                     </form>
                     @endif
                 </div>
