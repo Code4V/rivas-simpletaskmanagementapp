@@ -1,4 +1,7 @@
 @include('partials.header')
+@php 
+  $now = (new DateTime("now", new DateTimeZone("GMT+08:00")))->format('Y-m-d');
+@endphp
 <div class="xl:w-1/2 mx-auto lg:pt-10 px-4 xl:px-0">
 
   <div class="mt-12">
@@ -20,7 +23,7 @@
     </div>
     <div class="flex flex-col gap-1">
       <label for="" class="font-semibold">Due Date</label>
-      <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ (new DateTime())->format('Y-m-d') }}" value="{{ (new DateTime($task->duedate))->format('Y-m-d') }}">
+      <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ $now }}" value="{{ (new DateTime($task->duedate))->format('Y-m-d') }}">
     </div>
 
     <input type="hidden" name="id" value="{{ $task->id }}">

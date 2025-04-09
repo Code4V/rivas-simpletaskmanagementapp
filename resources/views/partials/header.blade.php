@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/css/app.css')
   <title>Simple Task Management</title>
+  <link rel="shortcut icon" href="{{ URL::to('/')}}/images/wave.png" type="image/x-icon">
 </head>
 <body class="bg-white">
 

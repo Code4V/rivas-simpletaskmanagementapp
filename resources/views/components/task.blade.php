@@ -3,18 +3,24 @@
     $duedate = (new DateTime($duedate, new DateTimeZone('GMT+08:00')));
     $duedateFormatted = sprintf("hover:after:content-['%s']", $duedate->format("Y-m-d"));
 
-    $dueRelative = date_diff($duedate, $now);
+    $dueRelative = date_diff($now, $duedate);
 
-    $remaining = (int) $dueRelative->format("%a");
+    $remaining = (int) $dueRelative->format("%R%a");
 
     $daysleft = '';
 
+    $isoverdue = $remaining < 0 ? true : false;
+
     if ($remaining == 0)  {
-        $daysleft .= "Within the day";
+        $daysleft = "Within the day";
     } else if ($remaining == 1) {
-        $daysleft .= "A day left";
+        $daysleft = "A day left";
+    } else if ($remaining == -1) {
+        $daysleft = "A day ago";
+    } else if ($remaining < 0) {
+        $daysleft = sprintf("%s day ago", abs($remaining));
     } else 
-        $daysleft .= sprintf("%s days left", $remaining);
+        $daysleft = sprintf("%s days left", $remaining);
 
 @endphp
 
@@ -52,7 +58,7 @@
         <div class="max-w-80 text-sm line-clamp-3 text-slate-700 mb-2">
             <p>{{ $description }}</p>
         </div>
-        <div class="flex mt-auto">
+        <div class="flex gap-1 mt-auto">
             @if ($iscomplete)
             <span class="border text-xs border-green-400 bg-green-100/50 text-green-900 font-semibold rounded-full px-2 py-1">
                 Complete
@@ -62,6 +68,11 @@
                 Pending
             </span>
             @endif
+            @if ($isoverdue && !$iscomplete) 
+            <span class="border text-xs border-red-400 bg-red-100/50 text-red-900 font-semibold rounded-full px-2 py-1">
+                Overdue
+            </span>
+            @endif 
         </div>
     </section>
 </div>

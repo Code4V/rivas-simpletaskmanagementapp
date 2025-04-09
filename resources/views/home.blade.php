@@ -1,6 +1,6 @@
 @include('partials.header')
 @php 
-  $now = (new DateTime())->format('Y-m-d');
+  $now = (new DateTime("now", new DateTimeZone("GMT+08:00")))->format('Y-m-d');
 @endphp
 <div class="xl:w-3/4 mx-auto grid lg:grid-cols-8 lg:pt-10 px-4 xl:px-0">
   <section class="lg:col-span-2 lg:mr-8 bg-slate-50 px-4 py-6 rounded-md">
@@ -20,7 +20,7 @@
       </div>
       <div class="flex flex-col gap-1">
         <label for="" class="font-semibold">Due Date</label>
-        <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ (new DateTime())->format('Y-m-d') }}" value="{{ $now }}" required>
+        <input name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ $now }}" value="{{ $now }}" required>
       </div>
       <button type="submit" class="px-4 hover:bg-sky-950 transition py-2 w-fit rounded-md bg-sky-900 text-white"> Insert Task </button>
     </form>
@@ -34,7 +34,7 @@
           <p class="flex">Click the stack icon on a task for more options!
           </p>
           <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24" fill="none" class="hover:stroke-sky-950 cursor-pointer transition duration-250 stroke-sky-900">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1.25rem" height="1.25rem" viewBox="0 0 24 24" fill="none" class="hover:stroke-sky-950 transition duration-250 stroke-sky-900">
               <path d="M5 6H19M5 10H19M5 14H19M5 18H19" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </span>
