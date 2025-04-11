@@ -44,8 +44,13 @@ class TasksController extends Controller
     }
 
     public function insert(Request $request): RedirectResponse {
-        $task = new Tasks;
+        $request->validate([
+            'title' => 'required|max:60',
+            'description' => 'max:128',
+            'duedate' => 'required'
+        ]);
 
+        $task = new Tasks;
         $task->title = $request->title;
         $task->description = $request->description; 
         $task->duedate = $request->duedate; 
@@ -63,6 +68,13 @@ class TasksController extends Controller
     }
 
     public function update(Request $request): RedirectResponse {
+        $request->validate([
+            'id' => 'required',
+            'title' => 'required|max:60',
+            'description' => 'max:128',
+            'duedate' => 'required'
+        ]);
+
         $updateInfo = Tasks::find($request->id); 
         $updateInfo->title = $request->title;
         $updateInfo->description = $request->description;

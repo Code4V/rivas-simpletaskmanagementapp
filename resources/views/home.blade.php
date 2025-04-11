@@ -13,17 +13,27 @@
       <div class="flex flex-col gap-1">
         <label for="title" class="font-semibold">Title<span class="text-sky-900"> *</span></label>
         <input id="title" name="title" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="Have a task in mind?" required>
+        @error('title')
+          <div class="text-red-600/70">{{ $message }}</div>
+        @enderror
       </div>
       <div class="flex flex-col gap-1">
         <label for="description" class="font-semibold">Description</label>
         <input id="description" name="description" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="Briefly describe your task">
+        @error('description')
+          <div class="text-red-600/70">{{ $message }}</div>
+        @enderror
       </div>
       <div class="flex flex-col gap-1">
         <label for="dueDate" class="font-semibold">Due Date<span class="text-sky-900"> *</span></label>
         <input id="dueDate" name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ $now }}" value="{{ $now }}" required>
+        @error('duedate')
+          <div class="text-red-600/70">{{ $duedate }}</div>
+        @enderror
       </div>
       <button type="submit" class="px-4 hover:bg-sky-950 transition py-2 w-fit rounded-md bg-sky-900 text-white"> Insert Task </button>
     </form>
+
 
 
     <div class="lg:col-span-6 mt-6 lg:mt-24">

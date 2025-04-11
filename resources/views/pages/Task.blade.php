@@ -15,15 +15,24 @@
     @csrf
     <div class="flex flex-col gap-1">
       <label for="title" class="font-semibold">Title<span class="text-sky-900"> *</span></label>
-      <input id="title" name="title" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="What's on your mind" value="{{ $task->title }}">
+      <input id="title" name="title" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="What's on your mind" value="{{ $task->title }}" required>
+        @error('title')
+          <div class="text-red-600/70">{{ $message }}</div>
+        @enderror
     </div>
     <div class="flex flex-col gap-1">
       <label for="description" class="font-semibold">Description</label>
       <input id="description" name="description" class="px-4 py-2 border rounded-md border-slate-400" type="text" placeholder="Describe this task" value="{{ $task->description }}">
+        @error('description')
+          <div class="text-red-600/70">{{ $message }}</div>
+        @enderror
     </div>
     <div class="flex flex-col gap-1">
       <label for="dueDate" class="font-semibold">Due Date<span class="text-sky-900"> *</span></label>
-      <input id="dueDate" name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ $now }}" value="{{ (new DateTime($task->duedate))->format('Y-m-d') }}">
+      <input id="dueDate" name="duedate" class="px-4 py-2 border rounded-md border-slate-400" type="date" min="{{ $now }}" value="{{ (new DateTime($task->duedate))->format('Y-m-d') }}" required>
+        @error('duedate')
+          <div class="text-red-600/70">{{ $message }}</div>
+        @enderror
     </div>
 
     <input type="hidden" name="id" value="{{ $task->id }}">
